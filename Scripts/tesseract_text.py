@@ -9,7 +9,7 @@ def extract_from_file(file_path):
     text = pytesseract.image_to_string(Image.open(file_path))
     return text
 
-print(extract_from_file("./temp/inverted_img.jpg"))
+print(extract_from_file("../temp/inverted_img.jpg"))
 
 
 """
