@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload an Image File</h1>
+    {% csrf_token %}
+    <form id="upload-form" enctype="multipart/form-data" method="post" >
+        <input type="file" name="file" accept=".png,.jpg" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <div id="response">
+
+    </div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            var form = this;
+            var formData = new FormData(form);
+
+            fetch('http://127.0.0.1:8000/api/upload/',{
+                method: 'POST',
+                body : formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let inHTML = document.getElementById('response')
+                if('success' in data){
+                    inHTML.innerHTML = `<p>${data.success}</p>`
+                }
+                else if('error' in data){
+                    inHTML.innerHTML = `<p>${data.error}</p>`
+                }
+                else{
+                    inHTML.innerHTML = '<p>Unexpected Error</p>'
+                }
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+                document.getElementById('response').innerHTML = '<p>Error uploading file</p>'
+            });
+
+        });
+    </script>
+
+</body>
+</html>

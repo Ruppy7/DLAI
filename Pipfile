@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pillow = "*"
+pymupdf = "*"
+pytesseract = "*"
+opencv-python = "*"
+pdf2image = "*"
+tabula-py = "*"
+django = "*"
+djangorestframework = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
